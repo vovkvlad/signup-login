@@ -1,6 +1,7 @@
 from termcolor import colored
 
-class logger:
+
+class Logger:
 
     SUPPORTED_COLORS = (
         'grey',
