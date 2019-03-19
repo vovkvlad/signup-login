@@ -7,6 +7,8 @@ def create_app(test_config=None):
     print("==========================FLASK ROOT_PATH======================")
     print(app.root_path)
     print("==========================FLASK ROOT_PATH======================")
-    db.init_app(app)
+    with app.app_context():
+        db.init_app(app)
+
     register_routes(app)
     return app
