@@ -40,4 +40,5 @@ class User:
         cursor.execute("DELETE FROM users WHERE id=?", id)
 
         db.commit()
+        # test comment
         return cursor.fetchone()
