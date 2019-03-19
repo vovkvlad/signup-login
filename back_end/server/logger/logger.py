@@ -37,6 +37,6 @@ class Logger:
             print(warning)
 
         else:
-            text = f'{self.delimiter}{self.name}{message}'
+            text = f'{self.delimiter} {self.name}: {message}'
             log_message = colored(text, self.color, None, attribute)
             print(log_message)
