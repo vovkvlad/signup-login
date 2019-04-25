@@ -1,44 +1,44 @@
 from server.db import get_db, db_logger
 
 
-class User:
+def create_user(email, password):
+    if email is None or password is None:
+        raise ValueError('Email and password a mandatory fields')
 
-    def create_user(self, email, password):
-        if email is None or password is None:
-            raise ValueError('Email and password a mandatory fields')
+    db_logger.log(f'Trying to create user with email={email}, password={password}')
+    db = get_db()
+    cursor = db.cursor()
+    cursor.execute("INSERT INTO users(email, password) VALUES (?,?)", (email, password))
 
-        db_logger.log(f'Trying to create user with email={email}, password={password}')
-        db = get_db()
-        cursor = db.cursor()
-        cursor.execute("INSERT INTO users VALUES (?,?)", (email, password))
+    new_user_id = cursor.lastrowid
 
-        new_user_id = cursor.lastrowid
-        cursor.execute("SELECT * FROM users WHERE id=?", new_user_id)
 
-        db.commit()
-        db_logger(f'User has been created successfully. New user_id is {new_user_id}')
-        return cursor.fetchone()
+    db.commit()
+    db_logger(f'User has been created successfully. New user_id is {new_user_id}')
+    return new_user_id
 
-    def find_user(self, email):
-        if email is None:
-            raise ValueError('Email must be provided to find_user method to make a lookup')
 
-        db = get_db()
-        cursor = db.cursor()
+def find_user(email):
+    if email is None:
+        raise ValueError('Email must be provided to find_user method to make a lookup')
 
-        cursor.execute("SELECT * FROM users WHERE email=?", email)
+    db = get_db()
+    cursor = db.cursor()
 
-        return cursor.fetchone()
+    cursor.execute("SELECT * FROM users WHERE email=?", (email,))
 
-    def delete_user(self, id):
-        if id is None:
-            raise ValueError('Id must be provided to delete user')
+    return cursor.fetchone()
 
-        db = get_db()
-        cursor = db.cursor()
 
-        cursor.execute("DELETE FROM users WHERE id=?", id)
+def delete_user(id):
+    if id is None:
+        raise ValueError('Id must be provided to delete user')
 
-        db.commit()
-        # test comment
-        return cursor.fetchone()
+    db = get_db()
+    cursor = db.cursor()
+
+    cursor.execute("DELETE FROM users WHERE id=?", (id,))
+
+    db.commit()
+    # test comment
+    return cursor.fetchone()
