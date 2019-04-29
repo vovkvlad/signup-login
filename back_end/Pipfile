@@ -8,6 +8,7 @@ verify_ssl = true
 [packages]
 flask = "*"
 termcolor = "*"
+py-bcrypt = "*"
 
 [requires]
 python_version = "3.6"
