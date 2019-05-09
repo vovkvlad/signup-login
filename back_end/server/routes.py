@@ -12,7 +12,7 @@ def register_routes(app):
 
     @app.route('/signup')
     def signup():
-        return send_file('../../front-end/sign_up.html')
+        return send_file('../../front-end/pages/signup.html')
 
     @app.route('/public/<path:path>')
     def host_static(path):
