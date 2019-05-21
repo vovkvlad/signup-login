@@ -1,0 +1,37 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+input {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid black;
+  font-size: 16px;
+}
+
+button {
+  background: transparent;
+  height: 40px;
+  width: 80px;
+  outline: none;
+  border: 1px solid black;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 2px 2px 10px 1px rgba(0,0,0,0.28);
+}
+
+button:active {
+  border: 2px solid black;
+  border-style: outset;
+  box-shadow: none;
+}
+
+input:focus {
+  outline: none;
+}
+
+html {
+  font-family: 'Roboto', sans-serif;
+}
