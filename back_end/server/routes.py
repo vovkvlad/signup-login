@@ -1,4 +1,5 @@
-from flask import send_from_directory, send_file
+from flask import send_from_directory, send_file, request, jsonify
+import json
 from server.db.user import create_user, authenticate_user
 
 def register_routes(app):
@@ -19,10 +20,11 @@ def register_routes(app):
         return send_from_directory('../../front-end/public', path)
 
     #this is demo routes - should be deleted later
-    @app.route('/user/create')
+    @app.route('/user/create', methods=['GET', 'POST'])
     def create_user_request():
-        create_user('testemailAAAAA@gamil.com', 'password123')
-        return 'User should have been created'
+        user_dict = json.loads(request.data)
+        new_user_id = create_user(user_dict['email'], user_dict['password'])
+        return jsonify({'id': new_user_id})
 
     @app.route('/user/auth')
     def authenticate_user_request():
