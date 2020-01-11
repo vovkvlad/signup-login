@@ -1,4 +1,4 @@
-from flask import send_from_directory, send_file, request, jsonify
+from flask import send_from_directory, send_file, request, jsonify, redirect
 import json
 from server.db.user import create_user, authenticate_user
 
@@ -9,7 +9,7 @@ def register_routes(app):
 
     @app.route('/login')
     def login():
-        return 'Login'
+        return send_file('../../front-end/pages/login.html')
 
     @app.route('/signup')
     def signup():
